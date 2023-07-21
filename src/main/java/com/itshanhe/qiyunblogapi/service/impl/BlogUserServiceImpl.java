@@ -43,9 +43,29 @@ public class BlogUserServiceImpl implements BlogUserService {
         }
     }
     
+    /**
+     * 用户登陆
+     * @param username 用户账号
+     * @param password 用户密码
+     * @return BlogUser 实体类
+     */
     @Override
-    public String userLogin(String username, String password) {
-        return null;
+    public BlogUser userLogin(String username, String password) {
+        BlogUser selectUserData =  userMapper.selectUserData(username);
+        //        判断是否有账号
+        if (selectUserData == null) {
+            log.info("未查询到有账号");
+            return null;
+        }
+//        如果账号正确,那就开始比对加密后的密码
+        if (!password.equals(selectUserData.getUserPassword())) {
+            log.info("密码错误,账号为:{}",selectUserData.getUserUsername());
+            log.info("查询到的密码是:{},提交的密码是:{}",selectUserData.getUserPassword(),password);
+            return null;
+        }
+        log.info("成功{}",selectUserData);
+//        都比对成功就返回成功
+        return selectUserData;
     }
     
     @Override
@@ -94,5 +114,22 @@ public class BlogUserServiceImpl implements BlogUserService {
     public int setLocked(String id, int setLock) {
         int lock = userMapper.setLocked(id,setLock);
         return 0;
+    }
+    
+    /**
+     * 设置用户token信息
+     * @param userId 用户id
+     * @param jwtToken token信息
+     */
+    @Override
+    public void userSetToken(Integer userId, String jwtToken) {
+        String token = userMapper.userSelectToken(userId);
+//        判断token是不是已经存在
+        if (token !=null) {
+//            修改Token值
+            userMapper.userUpdateToken(userId,jwtToken);
+            return;
+        }
+        userMapper.userSetToken(userId,jwtToken);
     }
 }

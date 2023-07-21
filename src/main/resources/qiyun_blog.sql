@@ -40,9 +40,8 @@ CREATE TABLE `qiyun_blog_user_and`(
 -- token表
 CREATE TABLE `qiyun_blog_user_token` (
                                          `token_user_id` BIGINT(20) NOT NULL COMMENT '用户主键id',
-                                         `token` VARCHAR(32) NOT NULL COMMENT 'token值(32位字符串)',
+                                         `token` VARCHAR(200) NOT NULL COMMENT 'token值',
                                          `token_update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
-                                         `token_expire_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'token过期时间',
                                          PRIMARY KEY (`token_user_id`),
                                          UNIQUE KEY `uq_token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT 'token表';
@@ -85,9 +84,9 @@ CREATE TABLE `qiyun_blog_article_comments_content`(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '评论内容表';
 
 
-INSERT INTO `qiyun_blog_user` (`user_id`,`user_username`,`user_password`,`user_nick_name`,`user_email`,`user_date`,`user_update_date`,`user_locked`) VALUES ('1001','shanhe','E10ADC3949BA59ABBE56E057F20F883E','山河开发','demo@qq.com','2023-07-16 00:15:05',DEFAULT,'0');
+INSERT INTO `qiyun_blog_user` (`user_id`,`user_username`,`user_password`,`user_nick_name`,`user_email`,`user_date`,`user_update_date`,`user_locked`) VALUES ('1001','shanhe','9d50eb043fde4f56647ecb7d27f71e91','山河开发','demo@qq.com','2023-07-16 00:15:05',DEFAULT,'0');
 
-INSERT INTO `qiyun_blog_user` (`user_username`,`user_password`,`user_nick_name`,`user_email`,`user_date`,`user_update_date`,`user_locked`) VALUES ('test','E10ADC3949BA59ABBE56E057F20F883E','山河测试','demo@126.com','2023-07-16 00:15:05',DEFAULT,'0');
+INSERT INTO `qiyun_blog_user` (`user_username`,`user_password`,`user_nick_name`,`user_email`,`user_date`,`user_update_date`,`user_locked`) VALUES ('test','9d50eb043fde4f56647ecb7d27f71e91','山河测试','demo@126.com','2023-07-16 00:15:05',DEFAULT,'0');
 
 INSERT INTO `qiyun_blog_user_and` (`and_user_id`,`and_user_admin`) VALUES ('1001',1);
 INSERT INTO `qiyun_blog_user_and` (`and_user_id`,`and_user_admin`) VALUES ('1002',DEFAULT);

@@ -7,6 +7,7 @@ import com.itshanhe.qiyunblogapi.param.BlogRegisterParam;
 import com.itshanhe.qiyunblogapi.service.BlogUserService;
 import com.itshanhe.qiyunblogapi.service.MailService;
 import com.itshanhe.qiyunblogapi.util.DomainUtil;
+import com.itshanhe.qiyunblogapi.util.JwtUtil;
 import com.itshanhe.qiyunblogapi.util.MD5Util;
 import com.itshanhe.qiyunblogapi.util.TimeUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户管理
@@ -91,7 +94,13 @@ public class UserController {
         return Result.success("注册成功！请在邮箱里点击验证才能完成注册.");
     }
     
-    @PostMapping("")
+    /**
+     * 用户登录
+     * @param blogLoginParam 登陆信息
+     * @param result 数据校验错误信息（自动）
+     * @return 颁发一个token令牌
+     */
+    @PostMapping("login")
     public Result login(@RequestBody @Valid BlogLoginParam blogLoginParam, BindingResult result) {
         //        数据校验错误信息
         if(result.hasErrors()) {
@@ -103,9 +112,35 @@ public class UserController {
         if (this.paramError != null) {
             return Result.error(this.paramError);
         }
-        return Result.success();
+        BlogUser userLogin = blogUserService.userLogin(blogLoginParam.getUserUsername(),MD5Util.Md5Code(blogLoginParam.getUserPassword()));
+        if (userLogin == null) {
+            return Result.error("账号或密码错误");
+        }
+//        验证用户是否是锁定状态
+        if (userLogin.getUserLocked() == 1) {
+            return Result.error("你的账号已经被锁定");
+        }
+//        验证完之后颁发token令牌 令牌默认24小时后过期
+        Map<String,Object> claims =new HashMap<>();
+//        发给前端的ID -1000 因为SQL里面设置的是1000开头
+        claims.put("uuid",(userLogin.getUserId()-1000));
+        claims.put("name",userLogin.getUserUsername());
+        String JwtToken = JwtUtil.generateJwt(claims);
+        log.info("token令牌{}",claims);
+//        写入数据库
+        blogUserService.userSetToken(userLogin.getUserId(),JwtToken);
+        log.info("token记录数据库成功");
+//        返回token令牌
+        return Result.success("登陆成功，返回Token令牌",JwtToken);
     }
     
+    /**
+     * 验证用户注册,用户需要点击才能完成注册
+     * @param longTime 简单的时间戳
+     * @param name 用户账号
+     * @param md5 由ID加密得到的校验码
+     * @return 验证注册完成信息
+     */
     @GetMapping("/emailVerify/{longTime}/name={name}&md5={md5}")
     public Result emailVerify(@PathVariable Long longTime,@PathVariable String name,@PathVariable String md5) {
 //        获取现在时间然后判断过期时间,是否过期了

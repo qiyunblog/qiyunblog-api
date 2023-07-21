@@ -2,6 +2,8 @@ package com.itshanhe.qiyunblogapi.service;
 
 import com.itshanhe.qiyunblogapi.entity.BlogUser;
 
+import java.util.Map;
+
 /**
  * 用户相关接口
  */
@@ -21,7 +23,7 @@ public interface BlogUserService {
      * @param password 用户密码
      * @return
      */
-    String userLogin(String username,String password);
+    BlogUser userLogin(String username,String password);
     
     /**
      * 用户信息修改
@@ -58,4 +60,11 @@ public interface BlogUserService {
      * @return
      */
     int setLocked(String id,int setLock);
+    
+    /**
+     * 设置用户token信息
+     * @param userId 用户id
+     * @param jwtToken token信息
+     */
+    void userSetToken(Integer userId, String jwtToken);
 }

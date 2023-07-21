@@ -1,12 +1,14 @@
 package com.itshanhe.qiyunblogapi.interceptor;
 
-import com.alibaba.fastjson2.JSONObject;
+
+import com.alibaba.fastjson.JSONObject;
 import com.itshanhe.qiyunblogapi.entity.Result;
 import com.itshanhe.qiyunblogapi.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,9 +28,10 @@ public class WebInterceptor implements HandlerInterceptor {
             log.info("放行验证");
             return true;
         }
-//        获取请求头的token令牌
+        
+//3.获取请求头中的令牌（token）。
         String jwt = request.getHeader("token");
-
+    
         //4.判断令牌是否存在，如果不存在，返回错误结果（未登录）。
         if(!StringUtils.hasLength(jwt)){
             log.info("请求头token为空,返回未登录的信息");
@@ -38,7 +41,7 @@ public class WebInterceptor implements HandlerInterceptor {
             response.getWriter().write(notLogin);
             return false;
         }
-
+    
         //5.解析token，如果解析失败，返回错误结果（未登录）。
         try {
             JwtUtil.parseJWT(jwt);
@@ -51,11 +54,9 @@ public class WebInterceptor implements HandlerInterceptor {
             response.getWriter().write(notLogin);
             return false;
         }
-
+    
         //6.放行。
         log.info("令牌合法, 放行");
         return true;
-
-
     }
 }

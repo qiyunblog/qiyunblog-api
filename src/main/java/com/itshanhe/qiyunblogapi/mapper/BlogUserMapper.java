@@ -28,6 +28,14 @@ public interface BlogUserMapper {
     BlogUser selectUserDataName(String username);
     
     /**
+     * 通过姓名得到全部信息
+     * @param username 用户姓名
+     * @return
+     */
+    @Select("SELECT * FROM qiyun_blog_user WHERE user_username = #{username}")
+    BlogUser selectUserData(String username);
+    
+    /**
      * 查询用户id
      * @param userUsername 用户账号
      * @return
@@ -59,4 +67,28 @@ public interface BlogUserMapper {
      */
     @Update("UPDATE qiyun_blog_user SET user_update_date =DEFAULT,user_locked = #{setLock} WHERE user_id = #{id}")
     int setLocked(String id, int setLock);
+    
+    /**
+     * 记录用户token
+     * @param userId 用户id
+     * @param jwtToken token
+     */
+    @Insert("INSERT INTO qiyun_blog_user_token(token_user_id, token) VALUES (#{userId},#{jwtToken})")
+    void userSetToken(Integer userId, String jwtToken);
+    
+    /**
+     * 查询是否有token
+     * @param userId 用户id
+     * @return
+     */
+    @Select("SELECT token FROM qiyun_blog_user_token WHERE token_user_id = #{userId}")
+    String userSelectToken(Integer userId);
+    
+    /**
+     * 修改token
+     * @param userId 用户id
+     * @param jwtToken token
+     */
+    @Update("UPDATE qiyun_blog_user_token SET token = #{jwtToken},token_update_time = DEFAULT WHERE token_user_id = #{userId}")
+    void userUpdateToken(Integer userId, String jwtToken);
 }
