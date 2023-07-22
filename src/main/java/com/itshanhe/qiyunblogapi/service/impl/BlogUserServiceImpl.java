@@ -1,8 +1,11 @@
 package com.itshanhe.qiyunblogapi.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.itshanhe.qiyunblogapi.entity.BlogUser;
+import com.itshanhe.qiyunblogapi.entity.Result;
 import com.itshanhe.qiyunblogapi.mapper.BlogUserMapper;
 import com.itshanhe.qiyunblogapi.service.BlogUserService;
+import com.itshanhe.qiyunblogapi.util.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -131,5 +134,33 @@ public class BlogUserServiceImpl implements BlogUserService {
             return;
         }
         userMapper.userSetToken(userId,jwtToken);
+    }
+    
+    /**
+     * 更改用户信息
+     * @param userID 用户ID
+     * @param token 令牌
+     * @return 1成功 -1失败
+     */
+    @Override
+    public int userTokenStatus(Integer userID, String token) {
+        String userToken = userMapper.userSelectToken(userID);
+        if (token != null) {
+//            判断token是否存在,然后再判断是否过期了
+            //5.解析token，如果解析失败，返回错误结果（未登录）。
+            try {
+                JwtUtil.parseJWT(token);
+//                log.info("{}",JwtUtil.parseJWT(token));
+            } catch (Exception e) {//jwt解析失败
+                e.printStackTrace();
+                log.info("解析令牌失败, 返回未登录错误信息");
+                return -1;
+            }
+//            存在
+            return 1;
+        } else {
+//            不存在token就返回-1
+            return -1;
+        }
     }
 }

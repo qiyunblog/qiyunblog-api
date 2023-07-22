@@ -40,4 +40,8 @@ public class Result implements Serializable {
     public static Result error(String msg){
         return new Result(RESULT_CODE_ERROR,msg,null);
     }
+//    不存在响应
+    public static Result error(String msg,int num){
+        return new Result(RESULT_CODE_NULL,msg,num);
+    }
 }

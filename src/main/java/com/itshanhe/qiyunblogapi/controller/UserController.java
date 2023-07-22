@@ -4,6 +4,7 @@ import com.itshanhe.qiyunblogapi.entity.BlogUser;
 import com.itshanhe.qiyunblogapi.entity.Result;
 import com.itshanhe.qiyunblogapi.param.BlogLoginParam;
 import com.itshanhe.qiyunblogapi.param.BlogRegisterParam;
+import com.itshanhe.qiyunblogapi.param.BlogUpdateParam;
 import com.itshanhe.qiyunblogapi.service.BlogUserService;
 import com.itshanhe.qiyunblogapi.service.MailService;
 import com.itshanhe.qiyunblogapi.util.DomainUtil;
@@ -167,5 +168,26 @@ public class UserController {
 //        更改锁定状态 更改为解锁
         blogUserService.setLocked(id,0);
         return Result.success("注册成功!");
+    }
+    @PostMapping("updateUser")
+    public Result updateUserContent(@RequestBody @Valid BlogUpdateParam blogUpdateParam, BindingResult result) {
+//        数据校验错误信息
+        if(result.hasErrors()) {
+            List<ObjectError> list = result.getAllErrors();
+            for (ObjectError error : list) {
+                this.paramError = (error.getCode()+ "-" + error.getDefaultMessage());
+            }
+        }
+        if (this.paramError != null) {
+            return Result.error(this.paramError);
+        }
+        //为了防止不是Web端访问,所以单独要判断一个Token并且校验token
+//        +1000是因为令牌我发回去的时候是-1000的情况
+        if (blogUserService.userTokenStatus((blogUpdateParam.getUserID()+1000),blogUpdateParam.getToken()) == -1) {
+            return Result.error("Token过期或者不存在",-1);
+        }
+//        更改个人信息 复杂SQL语句，暂时不写
+        
+        return Result.success("更改成功");
     }
 }

@@ -67,4 +67,12 @@ public interface BlogUserService {
      * @param jwtToken token信息
      */
     void userSetToken(Integer userId, String jwtToken);
+    
+    /**
+     * 更改用户信息
+     * @param userID 用户ID
+     * @param token 令牌
+     * @return -1失败 1成功
+     */
+    int userTokenStatus(Integer userID, String token);
 }
