@@ -102,7 +102,7 @@ INSERT INTO `qiyun_blog_user` (`user_id`,`user_username`,`user_password`,`user_n
 INSERT INTO `qiyun_blog_user` (`user_username`,`user_password`,`user_nick_name`,`user_email`,`user_date`,`user_update_date`,`user_locked`) VALUES ('test','9d50eb043fde4f56647ecb7d27f71e91','山河测试','demo@126.com','2023-07-16 00:15:05',DEFAULT,'0');
 
 -- 默认分类
-INSERT INTO `qiyun_blog_article_category` (`category_id`,`category_name`,`category_nickname`) VALUES (1,"默认分类","default category");
+INSERT INTO `qiyun_blog_article_category` (`category_id`,`category_name`,`category_nickname`) VALUES (1,'默认分类','default category');
 
 -- 默认用户权限
 INSERT INTO `qiyun_blog_user_and` (`and_user_id`,`and_user_admin`) VALUES ('1001',1);
