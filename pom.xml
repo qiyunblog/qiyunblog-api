@@ -76,6 +76,12 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.76</version>
         </dependency>
+<!-- spring doc -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.11</version>
+        </dependency>
 
 <!--       JWT 问题，需要单独引入 jdk 11的包-->
         <dependency>

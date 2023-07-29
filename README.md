@@ -17,4 +17,5 @@
 本来想用基于Vue脚手架,然后使用ElementUI的,但是奈何实力不精,放弃了.
 
 ### API接口
-目前还没用到Swagger,等我写完会用Swagger生成API接口
+本项目基于Spring Doc库来构建API文档，
+项目运行之后打开/swagger-ui/index.html就是API文档
