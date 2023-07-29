@@ -8,6 +8,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `qiyun_blog_user`;
 DROP TABLE IF EXISTS `qiyun_blog_user_and`;
 DROP TABLE IF EXISTS `qiyun_blog_user_token`;
+DROP TABLE IF EXISTS `qiyun_blog_article_category`;
 DROP TABLE IF EXISTS `qiyun_blog_article`;
 DROP TABLE IF EXISTS `qiyun_blog_article_content`;
 DROP TABLE IF EXISTS `qiyun_blog_article_comments`;
@@ -46,6 +47,13 @@ CREATE TABLE `qiyun_blog_user_token` (
                                          UNIQUE KEY `uq_token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT 'token表';
 
+-- 分类表
+CREATE TABLE `qiyun_blog_article_category`(
+                                              `category_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '分类id',
+                                              `category_name` TEXT NOT NULL COMMENT '分类名称(展示名词)',
+                                              `category_nickname` TEXT NOT NULL COMMENT '分类别名(英文名)',
+                                              PRIMARY KEY (`category_id`) USING BTREE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '分类表';
 
 -- 文章表
 CREATE TABLE `qiyun_blog_article`(
@@ -60,10 +68,15 @@ CREATE TABLE `qiyun_blog_article`(
 -- 文章内容表
 CREATE TABLE `qiyun_blog_article_content`(
                                              `content_article_blog_id` BIGINT(20) NOT NULL COMMENT '文章id',
+                                             `content_article_blog_article_id` BIGINT(20) NOT NULL DEFAULT '1' COMMENT '分类id',
+                                             `content_article_blog_name` VARCHAR(200) NOT NULL COMMENT '文章标题',
                                              `content_article_blog_boy` TEXT NOT NULL COMMENT '文章内容html',
+                                             `content_article_blog_category` INT NOT NULL DEFAULT '1' COMMENT '文章分类 默认第一个分类',
+                                             `content_article_blog_keyword` TEXT COMMENT '文章关键词 可为空 以逗号分割关键词标签',
                                              `content_article_recommend` TINYINT DEFAULT '0' COMMENT '文章精选 默认0不精选',
                                              PRIMARY KEY (`content_article_blog_id`) USING BTREE,
-                                             FOREIGN KEY(`content_article_blog_id`) REFERENCES qiyun_blog_article(`article_user_id`)
+                                             FOREIGN KEY(`content_article_blog_id`) REFERENCES qiyun_blog_article(`article_user_id`),
+                                             FOREIGN KEY(`content_article_blog_article_id`) REFERENCES qiyun_blog_article_category(`category_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '文章内容表';
 
 -- 评论表
@@ -78,16 +91,20 @@ CREATE TABLE `qiyun_blog_article_comments`(
 -- 评论内容表
 CREATE TABLE `qiyun_blog_article_comments_content`(
                                                       `content_comments_blog_id` BIGINT(20) UNIQUE NOT NULL COMMENT '评论id',
-                                                      `content_comments_blog_boy` TEXT NOT NULL COMMENT '文章内容html',
+                                                      `content_comments_blog_boy` TEXT NOT NULL COMMENT '评论内容',
                                                       `content_comments_recommend` TINYINT DEFAULT '0' COMMENT '评论精选 默认0不精选',
                                                       FOREIGN KEY(`content_comments_blog_id`) REFERENCES qiyun_blog_article_comments(`comments_user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '评论内容表';
 
-
+-- 密码 123456
 INSERT INTO `qiyun_blog_user` (`user_id`,`user_username`,`user_password`,`user_nick_name`,`user_email`,`user_date`,`user_update_date`,`user_locked`) VALUES ('1001','shanhe','9d50eb043fde4f56647ecb7d27f71e91','山河开发','demo@qq.com','2023-07-16 00:15:05',DEFAULT,'0');
 
 INSERT INTO `qiyun_blog_user` (`user_username`,`user_password`,`user_nick_name`,`user_email`,`user_date`,`user_update_date`,`user_locked`) VALUES ('test','9d50eb043fde4f56647ecb7d27f71e91','山河测试','demo@126.com','2023-07-16 00:15:05',DEFAULT,'0');
 
+-- 默认分类
+INSERT INTO `qiyun_blog_article_category` (`category_id`,`category_name`,`category_nickname`) VALUES (1,"默认分类","default category");
+
+-- 默认用户权限
 INSERT INTO `qiyun_blog_user_and` (`and_user_id`,`and_user_admin`) VALUES ('1001',1);
 INSERT INTO `qiyun_blog_user_and` (`and_user_id`,`and_user_admin`) VALUES ('1002',DEFAULT);
 
