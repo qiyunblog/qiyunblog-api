@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 用户管理
+ * 用户管理  API + Web版本
  */
 @Slf4j
 @RequestMapping("/user")
