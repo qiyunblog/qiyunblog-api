@@ -24,7 +24,7 @@ public class WebInterceptor implements HandlerInterceptor {
         String url = request.getRequestURI().toString();
         log.info("请求URL:{}",url);
 //        url中是否包含以下参数 如果有就放行
-        if (url.contains("/user/login") || url.contains("/user/register") || url.contains("/user/emailVerify") || url.contains("/user/updateUser") || url.contains("/home")) {
+        if (url.contains("/user/login") || url.contains("/user/register") || url.contains("/user/emailVerify") || url.contains("/user/updateApiUser")) {
             log.info("放行验证");
             return true;
         }

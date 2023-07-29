@@ -1,5 +1,6 @@
 package com.itshanhe.qiyunblogapi.controller;
 
+import com.itshanhe.qiyunblogapi.entity.BlogUpdateUser;
 import com.itshanhe.qiyunblogapi.entity.BlogUser;
 import com.itshanhe.qiyunblogapi.entity.Result;
 import com.itshanhe.qiyunblogapi.param.BlogLoginParam;
@@ -169,7 +170,14 @@ public class UserController {
         blogUserService.setLocked(id,0);
         return Result.success("注册成功!");
     }
-    @PostMapping("updateUser")
+    
+    /**
+     * 更改用户信息 API部分
+     * @param blogUpdateParam
+     * @param result
+     * @return
+     */
+    @PostMapping("updateApiUser")
     public Result updateUserContent(@RequestBody @Valid BlogUpdateParam blogUpdateParam, BindingResult result) {
 //        数据校验错误信息
         if(result.hasErrors()) {
@@ -186,6 +194,30 @@ public class UserController {
         if (blogUserService.userTokenStatus((blogUpdateParam.getUserID()+1000),blogUpdateParam.getToken()) == -1) {
             return Result.error("Token过期或者不存在",-1);
         }
+//        更改个人信息 复杂SQL语句，暂时不写
+        
+        return Result.success("更改成功");
+    }
+    
+    /**
+     * 更改用户信息 web
+     * @param blogUpdateUser
+     * @param result
+     * @return
+     */
+    @PostMapping("updateUser")
+    public Result updateUserContent(@RequestBody @Valid BlogUpdateUser blogUpdateUser, BindingResult result) {
+//        数据校验错误信息
+        if(result.hasErrors()) {
+            List<ObjectError> list = result.getAllErrors();
+            for (ObjectError error : list) {
+                this.paramError = (error.getCode()+ "-" + error.getDefaultMessage());
+            }
+        }
+        if (this.paramError != null) {
+            return Result.error(this.paramError);
+        }
+        
 //        更改个人信息 复杂SQL语句，暂时不写
         
         return Result.success("更改成功");

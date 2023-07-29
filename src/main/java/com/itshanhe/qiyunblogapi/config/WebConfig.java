@@ -20,17 +20,17 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 //        需要拦截的内容以及不需要拦截的内容
-        registry.addInterceptor(interceptor).addPathPatterns("/**")
-                .excludePathPatterns("/user/login","/user/register","/user/emailVerify","/user/updateUser","/home/**");
+        registry.addInterceptor(interceptor).addPathPatterns("/user/")
+                .excludePathPatterns("/user/login","/user/register","/user/emailVerify","/user/updateUser");
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/home/**").addResourceLocations("classpath:/web/");
     }
     
-//    @Override
-//    public void addViewControllers(ViewControllerRegistry registry) {
-////        指定控制器
-//        registry.addViewController("/").setViewName("index.html");
-//    }
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+//        指定控制器
+        registry.addViewController("/").setViewName("/home/index.html");
+    }
 }
