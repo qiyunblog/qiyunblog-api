@@ -2,43 +2,41 @@ package com.itshanhe.qiyunblogapi.service.impl;
 
 import com.itshanhe.qiyunblogapi.entity.BlogArticle;
 import com.itshanhe.qiyunblogapi.entity.BlogArticleContent;
-import com.itshanhe.qiyunblogapi.mapper.BlogArticeMapper;
+import com.itshanhe.qiyunblogapi.mapper.BlogArticleContentMapper;
+import com.itshanhe.qiyunblogapi.mapper.BlogArticleMapper;
 import com.itshanhe.qiyunblogapi.service.BlogArticleContentService;
 
 import java.util.List;
 
 public class BlogArticleContentServiceImpl implements BlogArticleContentService {
-    private BlogArticeMapper blogArticeMapper;
+    private BlogArticleContentMapper blogArticleContentMapper;
     @Override
-    public int insertBlog(BlogArticleContent blogArticleContent) {
-        BlogArticle blogArticle = new BlogArticle();
-        int i = blogArticeMapper.insertArticleBolg(blogArticle);
-
-        return 0;
+    public int insertBlog(Integer id,BlogArticleContent blogArticleContent) {
+        return blogArticleContentMapper.insertBlog(id, blogArticleContent);
     }
 
     @Override
     public int deleteBlog(Integer id) {
-        return 0;
+        return blogArticleContentMapper.deleteBlog(id);
     }
 
     @Override
-    public int updateBlog(BlogArticleContent blogArticleContent) {
-        return 0;
+    public int updateBlog(Integer id,BlogArticleContent blogArticleContent) {
+        return blogArticleContentMapper.updateBlog(id,blogArticleContent);
     }
 
     @Override
     public BlogArticleContent selectBlogArticleByArticleBlogId(Integer id) {
-        return null;
+        return blogArticleContentMapper.selectBlogArticleByArticleBlogId(id);
     }
 
     @Override
     public List<BlogArticleContent> selectAllBlogArticleByUserId(Integer id) {
-        return null;
+        return blogArticleContentMapper.selectAllBlogArticleByUserId(id);
     }
 
     @Override
     public int HideArticle(Integer id) {
-        return 0;
+        return blogArticleContentMapper.HideArticle(id);
     }
 }

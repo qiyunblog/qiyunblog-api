@@ -11,7 +11,7 @@ public interface BlogArticleContentMapper {
      * @return 1 成功 0 失败
      */
 
-    int insertBlog(BlogArticleContent blogArticleContent);
+    int insertBlog(Integer id,BlogArticleContent blogArticleContent);
 
     /**
      * 删除文章
@@ -25,7 +25,7 @@ public interface BlogArticleContentMapper {
      * @param blogArticleContent 文章属性
      * @return 1 成功 0 失败
      */
-    int updateBlog(BlogArticleContent blogArticleContent);
+    int updateBlog(Integer id,BlogArticleContent blogArticleContent);
 
     /**
      * 根据文章id查询文章属性

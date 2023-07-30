@@ -11,9 +11,9 @@ import java.util.Date;
 @AllArgsConstructor
 public class BlogArticle {
 //    用户id
-    private String articleUserId;
+    private Integer articleUserId;
 //    文章ID
-    private String articleBlogId;
+    private Integer articleBlogId;
 //    文章图片
     private Integer articleBlogImageId;
 //    文章简介

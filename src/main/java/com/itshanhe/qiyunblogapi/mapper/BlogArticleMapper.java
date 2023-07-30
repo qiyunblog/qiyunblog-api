@@ -1,11 +1,9 @@
-package com.itshanhe.qiyunblogapi.service;
+package com.itshanhe.qiyunblogapi.mapper;
 
 import com.itshanhe.qiyunblogapi.entity.BlogArticle;
 import org.apache.ibatis.annotations.Insert;
 
-import java.util.Date;
-
-public interface BlogArticleService {
+public interface BlogArticleMapper {
     //添加新的文章
     int insertArticle(BlogArticle blogArticle);
     //通过文章id进行修改点赞量
