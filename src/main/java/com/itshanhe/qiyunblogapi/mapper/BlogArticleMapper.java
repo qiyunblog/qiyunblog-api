@@ -40,7 +40,18 @@ public interface BlogArticleMapper {
     @Update("UPDATE qiyun_blog_article SET article_blog_id_content=#{introduction} WHERE article_blog_id= #{id}")
     int updateArticleIntroduction(Integer id, String introduction);
 
-    //根据用户id查询所有文章id
+    /**
+     * 查询所有文章id
+     * @param id 用户id
+     * @return
+     */
     @Select("SELECT article_blog_id FROM qiyun_blog_article WHERE article_user_id=#{id}")
     List<Integer> selectAllArticleIdByUserId(Integer id);
+
+    /**
+     * 删除文章
+     * @param id 文章id
+     * @return
+     */
+    int deleteArticleById(Integer id);
 }

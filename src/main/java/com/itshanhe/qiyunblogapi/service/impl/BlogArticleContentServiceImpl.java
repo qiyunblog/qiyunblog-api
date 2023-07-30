@@ -34,7 +34,13 @@ public class BlogArticleContentServiceImpl implements BlogArticleContentService 
      */
     @Override
     public int deleteBlog(Integer id) {
-        return blogArticleContentMapper.deleteBlog(id);
+        int i = blogArticleContentMapper.deleteBlog(id);
+
+        if (i==1){
+            return blogArticleMapper.deleteArticleById(id);
+        }
+
+        throw new RuntimeException("删除文章失败");
     }
     /**
      * 修改文章属性
