@@ -22,4 +22,6 @@ public class BlogArticle {
     private Integer articleNum;
 //    文章发布时间
     private Date articleBlogDate;
+//    文章数据
+    private BlogArticleContent blogArticleContent;
 }

@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BlogArticleContent {
-//    文章ID
-    private Integer contentArticleBlogId;
+////    文章ID
+//    private Integer contentArticleBlogId;
 //    文章分类ID
     private Integer contentArticleBlogArticleId;
 //    文章标题
