@@ -1,6 +1,7 @@
 package com.itshanhe.qiyunblogapi.service;
 
 import com.itshanhe.qiyunblogapi.entity.BlogArticleContent;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -34,19 +35,20 @@ public interface BlogArticleContentService {
      */
     BlogArticleContent selectBlogArticleByArticleBlogId(Integer id);
 
-    /**
-     * 根据用户id查询所有文章
-     * @param id 用户id
-     * @return 文章集合
-     */
-    List<BlogArticleContent> selectAllBlogArticleByUserId(Integer id);
 
     /**
-     * 隐藏文章
+     * 调整文章精选(-1 :隐藏文章  0 :不精选)
      * @param id 文章id
      * @return 1 成功 0 失败
      */
-    int HideArticle(Integer id);
+    @Update("UPDATE qiyun_blog_article_content SET content_article_recommend = #{recommend}")
+    int HideArticle(Integer id,Integer recommend);
 
+    /**
+     * 根据用户id查询所有文章中
+     * @param id 用户id
+     * @return
+     */
+    List<BlogArticleContent> selectAllArticleById(Integer id);
 
 }

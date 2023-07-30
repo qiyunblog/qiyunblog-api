@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest
 class QiyunblogApiApplicationTests {
     @Autowired
@@ -44,8 +46,15 @@ class QiyunblogApiApplicationTests {
     public void testInsertBlog(){
         BlogArticleContent blogArticleContent = new BlogArticleContent(null, "我是标题", "我是内容", "我是关键字", null);
 
-        int i = blogArticleContentService.insertBlog(1002, blogArticleContent);
+        int i = blogArticleContentService.HideArticle(100201,-1);
         System.out.println("测试:"+i);
+    }
+
+
+    @Test
+    public void testSelectBlogArticleId(){
+        List<BlogArticleContent> blogArticleContents = blogArticleContentService.selectAllArticleById(1002);
+        System.out.println("测试:"+blogArticleContents);
     }
 
 

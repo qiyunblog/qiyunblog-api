@@ -3,7 +3,10 @@ package com.itshanhe.qiyunblogapi.mapper;
 import com.itshanhe.qiyunblogapi.entity.BlogArticle;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
 
 public interface BlogArticleMapper {
 
@@ -37,4 +40,7 @@ public interface BlogArticleMapper {
     @Update("UPDATE qiyun_blog_article SET article_blog_id_content=#{introduction} WHERE article_blog_id= #{id}")
     int updateArticleIntroduction(Integer id, String introduction);
 
+    //根据用户id查询所有文章id
+    @Select("SELECT article_blog_id FROM qiyun_blog_article WHERE article_user_id=#{id}")
+    List<Integer> selectAllArticleIdByUserId(Integer id);
 }
