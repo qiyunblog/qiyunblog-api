@@ -27,7 +27,12 @@ public interface BlogArticleContentMapper {
      * @param blogArticleContent 文章属性
      * @return 1 成功 0 失败
      */
-
+    @Update("update qiyun_blog_article_content set content_article_blog_article_id=#{param2.contentArticleBlogArticleId}," +
+            " content_article_blog_name=#{param2.contentArticleBlogName}," +
+            "content_article_blog_boy=#{param2.contentArticleBlogBoy}," +
+            "content_article_blog_keyword=#{param2.contentArticleBlogKeyword}," +
+            "content_article_recommend=#{param2.contentArticleRecommend} " +
+            "where content_article_blog_id=#{id}")
     int updateBlog(Integer id,BlogArticleContent blogArticleContent);
 
     /**

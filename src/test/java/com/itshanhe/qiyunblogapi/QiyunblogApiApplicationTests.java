@@ -56,6 +56,12 @@ class QiyunblogApiApplicationTests {
         List<BlogArticleContent> blogArticleContents = blogArticleContentService.selectAllArticleById(1002);
         System.out.println("测试:"+blogArticleContents);
     }
+    @Test
+    public void te(){
+        BlogArticleContent blogArticleContent = new BlogArticleContent(1,"我是文章标题","我是文章内容","我是关键字",0);
+        int i = blogArticleContentService.updateBlog(100201, blogArticleContent);
+        System.out.println("测试:"+i);
+    }
 
 
 //    public void b(){
