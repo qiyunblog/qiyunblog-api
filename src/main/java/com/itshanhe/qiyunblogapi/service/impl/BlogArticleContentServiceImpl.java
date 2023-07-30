@@ -5,10 +5,14 @@ import com.itshanhe.qiyunblogapi.entity.BlogArticleContent;
 import com.itshanhe.qiyunblogapi.mapper.BlogArticleContentMapper;
 import com.itshanhe.qiyunblogapi.mapper.BlogArticleMapper;
 import com.itshanhe.qiyunblogapi.service.BlogArticleContentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class BlogArticleContentServiceImpl implements BlogArticleContentService {
+    @Autowired
     private BlogArticleContentMapper blogArticleContentMapper;
     @Override
     public int insertBlog(Integer id,BlogArticleContent blogArticleContent) {

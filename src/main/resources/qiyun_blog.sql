@@ -86,7 +86,7 @@ CREATE TABLE `qiyun_blog_article_content`(
                                              `content_article_blog_keyword` TEXT COMMENT '文章关键词 可为空 以逗号分割关键词标签',
                                              `content_article_recommend` TINYINT DEFAULT '0' COMMENT '文章精选 默认0不精选',
                                              PRIMARY KEY (`content_article_blog_id`) USING BTREE,
-                                             FOREIGN KEY(`content_article_blog_id`) REFERENCES qiyun_blog_article(`article_user_id`),
+                                             FOREIGN KEY(`content_article_blog_id`) REFERENCES qiyun_blog_article(`article_blog_id`),
                                              FOREIGN KEY(`content_article_blog_article_id`) REFERENCES qiyun_blog_article_category(`category_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '文章内容表';
 
