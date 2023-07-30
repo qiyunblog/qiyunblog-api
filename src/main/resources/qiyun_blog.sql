@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS `qiyun_blog_user`;
 DROP TABLE IF EXISTS `qiyun_blog_user_and`;
 DROP TABLE IF EXISTS `qiyun_blog_user_token`;
 DROP TABLE IF EXISTS `qiyun_blog_article_category`;
+DROP TABLE IF EXISTS `qiyun_blog_article_img`;
 DROP TABLE IF EXISTS `qiyun_blog_article`;
 DROP TABLE IF EXISTS `qiyun_blog_article_content`;
 DROP TABLE IF EXISTS `qiyun_blog_article_comments`;
@@ -55,14 +56,25 @@ CREATE TABLE `qiyun_blog_article_category`(
                                               PRIMARY KEY (`category_id`) USING BTREE
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '分类表';
 
+-- 图片
+CREATE TABLE `qiyun_blog_article_img`(
+                                         `article_blog_img_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '图片id',
+                                         `article_blog_img_address` TEXT NOT NULL COMMENT '图片地址',
+                                         `article_blog_img_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '上传时间',
+                                         PRIMARY KEY (`article_blog_img_id`) USING BTREE
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '图片表';
+
 -- 文章表
 CREATE TABLE `qiyun_blog_article`(
                                      `article_user_id` BIGINT(20) NOT NULL COMMENT '文章用户id',
                                      `article_blog_id` BIGINT(20) NOT NULL AUTO_INCREMENT COMMENT '文章id',
+                                     `article_blog_image_id` BIGINT(20) NOT NULL DEFAULT '1' COMMENT '图片id 默认图片 1',
+                                     `article_blog_id_content` TEXT NOT NULL COMMENT '文章简介',
                                      `article_blog_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
                                      `article_num` INT DEFAULT '0' COMMENT '评论数 默认0评论',
                                      PRIMARY KEY (`article_blog_id`) USING BTREE,
-                                     FOREIGN KEY(`article_user_id`) REFERENCES qiyun_blog_user(`user_id`)
+                                     FOREIGN KEY(`article_user_id`) REFERENCES qiyun_blog_user(`user_id`),
+                                     FOREIGN KEY(`article_blog_image_id`) REFERENCES qiyun_blog_article_img(`article_blog_img_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '文章表';
 
 -- 文章内容表
@@ -102,6 +114,9 @@ INSERT INTO `qiyun_blog_user` (`user_username`,`user_password`,`user_nick_name`,
 
 -- 默认分类
 INSERT INTO `qiyun_blog_article_category` (`category_id`,`category_name`,`category_nickname`) VALUES (1,'默认分类','default category');
+
+-- 默认图片
+INSERT INTO `qiyun_blog_article_img` (`article_blog_img_id`,`article_blog_img_address`,`article_blog_img_date`) VALUES (1,'test.img','2023-07-30 00:15:05');
 
 -- 默认用户权限
 INSERT INTO `qiyun_blog_user_and` (`and_user_id`,`and_user_admin`) VALUES ('1001',1);
