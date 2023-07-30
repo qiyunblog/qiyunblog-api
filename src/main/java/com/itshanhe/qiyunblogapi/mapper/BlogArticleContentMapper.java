@@ -1,11 +1,10 @@
 package com.itshanhe.qiyunblogapi.mapper;
 
 import com.itshanhe.qiyunblogapi.entity.BlogArticleContent;
-import org.apache.ibatis.annotations.Insert;
 
 import java.util.List;
 
-public interface BolgContentMapper {
+public interface BlogArticleContentMapper {
     /**
      * 添加文章
      * @param blogArticleContent 文章属性

@@ -14,6 +14,10 @@ public class BlogArticle {
     private String articleUserId;
 //    文章ID
     private String articleBlogId;
+//    文章图片
+    private Integer articleBlogImageId;
+//    文章简介
+    private String articleBlogIdContent;
 //    文章评论
     private Integer articleNum;
 //    文章发布时间

@@ -1,6 +1,7 @@
 package com.itshanhe.qiyunblogapi.mapper;
 
 import com.itshanhe.qiyunblogapi.entity.BlogArticle;
+import org.apache.ibatis.annotations.Insert;
 
 public interface BlogArticeMapper {
     /**
@@ -8,6 +9,7 @@ public interface BlogArticeMapper {
      * @param blogArticle 文章属性
      * @return
      */
+    @Insert("INSERT INTO qiyun_blog_article VALUES (#{articleUserId},#{articleBlogId},#{articleNum},#{articleBlogDate})")
     int updateArticleBlogDate(BlogArticle blogArticle);
 
     /**
