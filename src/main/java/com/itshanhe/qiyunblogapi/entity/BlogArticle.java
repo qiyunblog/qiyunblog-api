@@ -15,11 +15,7 @@ public class BlogArticle {
 //    文章ID
     private String articleBlogId;
 //    文章评论
-    private String articleNum;
-//    文章内容
-    private String contentArticleBlogBoy;
-//    文章状态
-    private String contentArticleRecommend;
+    private Integer articleNum;
 //    文章发布时间
     private Date articleBlogDate;
 }

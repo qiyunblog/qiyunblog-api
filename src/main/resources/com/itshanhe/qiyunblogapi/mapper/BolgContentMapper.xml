@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itshanhe.qiyunblogapi.mapper.BolgContentMapper">
+    <resultMap id="BlogArticle" type="com.itshanhe.qiyunblogapi.entity.BlogArticleContent" >
+        <id property="contentArticleBlogId" column="content_article_blog_id"/>
+        <result property="contentArticleBlogArticleId" column="content_article_blog_article_id"/>
+        <result property="contentArticleBlogName" column="content_article_blog_name"/>
+        <result property="contentArticleBlogBoy" column="content_article_blog_boy"/>
+        <result property="contentArticleBlogKeyword" column="content_article_blog_keyword"/>
+        <result property="contentArticleRecommend" column="content_article_recommend"/>
+    </resultMap>
+
+    <sql id="AllColumn">
+        content_article_blog_id,content_article_blog_article_id,
+        content_article_blog_name,content_article_blog_boy,
+        content_article_blog_keyword,content_article_recommend
+    </sql>
+    
+    <insert id="insertBlog" parameterType="com.itshanhe.qiyunblogapi.entity.BlogArticleContent">
+        INSERT INTO qiyun_blog_article_content VALUES (
+        #{contentArticleBlogId},#{contentArticleBlogArticleId},#{contentArticleBlogName},
+        #{contentArticleBlogBoy},#{contentArticleBlogKeyword},#{contentArticleRecommend})
+    </insert>
+    
+
+</mapper>
