@@ -71,7 +71,6 @@ CREATE TABLE `qiyun_blog_article_content`(
                                              `content_article_blog_article_id` BIGINT(20) NOT NULL DEFAULT '1' COMMENT '分类id',
                                              `content_article_blog_name` VARCHAR(200) NOT NULL COMMENT '文章标题',
                                              `content_article_blog_boy` TEXT NOT NULL COMMENT '文章内容html',
-                                             `content_article_blog_category` INT NOT NULL DEFAULT '1' COMMENT '文章分类 默认第一个分类',
                                              `content_article_blog_keyword` TEXT COMMENT '文章关键词 可为空 以逗号分割关键词标签',
                                              `content_article_recommend` TINYINT DEFAULT '0' COMMENT '文章精选 默认0不精选',
                                              PRIMARY KEY (`content_article_blog_id`) USING BTREE,
