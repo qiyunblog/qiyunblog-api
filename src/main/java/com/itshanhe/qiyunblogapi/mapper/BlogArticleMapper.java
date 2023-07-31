@@ -1,10 +1,7 @@
 package com.itshanhe.qiyunblogapi.mapper;
 
 import com.itshanhe.qiyunblogapi.entity.BlogArticle;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -20,15 +17,7 @@ public interface BlogArticleMapper {
     @Insert("INSERT INTO qiyun_blog_article VALUES (#{articleUserId},#{articleBlogId},DEFAULT,#{articleBlogIdContent},DEFAULT,DEFAULT)")
     int insertArticle(BlogArticle blogArticle);
 
-    /**
-     * 通过文章id进行修改点赞量
-     *
-     * @param id      文章id
-     * @param likeNum 点赞量
-     * @return
-     */
-    @Update("UPDATE qiyun_blog_article SET article_num= #{likeNum} WHERE article_blog_id= #{id}")
-    int updateArticleLikeNum(Integer id, Integer likeNum);
+
 
     /**
      * 通过文章id进行修改简介
@@ -53,5 +42,10 @@ public interface BlogArticleMapper {
      * @param id 文章id
      * @return
      */
+    @Delete("DELETE FROM qiyun_blog_article WHERE article_blog_id=#{id}")
     int deleteArticleById(Integer id);
+
+    @Update("UPDATE qiyun_blog_article SET article_blog_image_id=#{articleBlogImageId}," +
+            "article_blog_id_content=#{articleBlogIdContent},article_num=#{articleNum} WHERE article_blog_id=#{articleBlogId}")
+    int updateArticle(BlogArticle blogArticle);
 }

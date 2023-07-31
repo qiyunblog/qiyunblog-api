@@ -19,7 +19,7 @@ public interface BlogArticleContentMapper {
      * @param id 文章id
      * @return 1 成功 0 失败
      */
-    @Delete("DELETE FROM qiyun_blog_article_content WHERE content_article_blog_article_id=#{id}")
+    @Delete("DELETE FROM qiyun_blog_article_content WHERE content_article_blog_id=#{id}")
     int deleteBlog(Integer id);
 
     /**
