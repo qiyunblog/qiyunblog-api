@@ -1,5 +1,6 @@
 package com.itshanhe.qiyunblogapi.entity;
 
+import com.itshanhe.qiyunblogapi.Constant.BlogConstant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,12 @@ public class BlogArticleContent {
     private String contentArticleBlogKeyword;
 //    文章精选
     private Integer contentArticleRecommend;
+
+    public BlogArticleContent(Integer contentArticleBlogArticleId, String contentArticleBlogName, String contentArticleBlogBoy, String contentArticleBlogKeyword) {
+        this.contentArticleBlogArticleId = contentArticleBlogArticleId;
+        this.contentArticleBlogName = contentArticleBlogName;
+        this.contentArticleBlogBoy = contentArticleBlogBoy;
+        this.contentArticleBlogKeyword = contentArticleBlogKeyword;
+        this.contentArticleRecommend= BlogConstant.DEFAULT;
+    }
 }

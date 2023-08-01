@@ -16,7 +16,7 @@ public interface BlogArticleService {
      * @param blogArticle 用户和文章属性
      * @return
      */
-    public Boolean insertArticle(BlogArticle blogArticle);
+    Boolean insertArticle(BlogArticle blogArticle);
 
     /**
      * 删除文章

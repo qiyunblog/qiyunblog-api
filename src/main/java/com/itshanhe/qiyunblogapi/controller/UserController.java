@@ -12,6 +12,8 @@ import com.itshanhe.qiyunblogapi.util.DomainUtil;
 import com.itshanhe.qiyunblogapi.util.JwtUtil;
 import com.itshanhe.qiyunblogapi.util.MD5Util;
 import com.itshanhe.qiyunblogapi.util.TimeUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -107,6 +109,7 @@ public class UserController {
     @PostMapping("login")
     public Result login(@RequestBody @Valid BlogLoginParam blogLoginParam, BindingResult result) {
         //        数据校验错误信息
+        log.info("登录测试");
         if(result.hasErrors()) {
             List<ObjectError> list = result.getAllErrors();
             for (ObjectError error : list) {

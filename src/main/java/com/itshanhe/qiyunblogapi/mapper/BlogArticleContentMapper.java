@@ -44,16 +44,4 @@ public interface BlogArticleContentMapper {
     BlogArticleContent selectBlogArticleByArticleBlogId(Integer id);
 
 
-    /**
-     * 调整文章精选(-1 :隐藏文章  0 :不精选)
-     * @param id 文章id
-     * @return 1 成功 0 失败
-     */
-    @Update("UPDATE qiyun_blog_article_content SET content_article_recommend = #{recommend}")
-    int HideArticle(Integer id,Integer recommend);
-
-
-
-
-
 }

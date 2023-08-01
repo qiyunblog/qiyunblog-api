@@ -5,8 +5,11 @@ import com.itshanhe.qiyunblogapi.entity.BlogArticleContent;
 import com.itshanhe.qiyunblogapi.mapper.BlogArticleContentMapper;
 import com.itshanhe.qiyunblogapi.mapper.BlogArticleMapper;
 import com.itshanhe.qiyunblogapi.service.BlogArticleService;
+import io.swagger.models.auth.In;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +32,15 @@ public class BlogArticleServiceImpl implements BlogArticleService {
     public Boolean insertArticle(BlogArticle blogArticle) {
         //插入文章表
         blogArticleMapper.insertArticle(blogArticle);
-        //插入文章内容表
-        return blogArticleContentMapper.insertBlog(blogArticle.getArticleBlogId(), blogArticle.getBlogArticleContent()) > 0;
+
+        //插入文章内容信息
+        BlogArticleContent blogArticleContent = new BlogArticleContent();
+        BeanUtils.copyProperties(blogArticle.getBlogArticleContent(), blogArticleContent);
+
+        //获取文章id
+        Integer BlogId = blogArticle.getArticleBlogId();
+
+        return blogArticleContentMapper.insertBlog(BlogId, blogArticleContent) > 0;
     }
 
     /**
@@ -58,11 +68,24 @@ public class BlogArticleServiceImpl implements BlogArticleService {
      * @return
      */
     @Override
+    @Transactional
     public Boolean updateBlog(BlogArticle blogArticle) {
+        //获取文章id
+        Integer id = blogArticle.getArticleBlogId();
 
-        int i = blogArticleContentMapper.updateBlog(blogArticle.getArticleBlogId(), blogArticle.getBlogArticleContent());
-        i+=blogArticleMapper.updateArticle(blogArticle);
-        return i > 0;
+        //插入文章信息
+        BlogArticleContent blogArticleContent = new BlogArticleContent();
+        BeanUtils.copyProperties(blogArticle.getBlogArticleContent(), blogArticleContent);
+        //修改文章属性
+        int i = 0;
+
+        i += blogArticleMapper.updateArticle(blogArticle);
+        i += blogArticleContentMapper.updateBlog(id, blogArticleContent);
+
+        if (i == 2) {
+            return true;
+        }
+        throw new RuntimeException("修改失败");
     }
 
     /**

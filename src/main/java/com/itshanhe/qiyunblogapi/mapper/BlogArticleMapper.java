@@ -13,21 +13,11 @@ public interface BlogArticleMapper {
      *
      * @param blogArticle 用户和文章连接属性
      * @return
-     */                                                              //文章ID默认值
-    @Insert("INSERT INTO qiyun_blog_article VALUES (#{articleUserId},#{articleBlogId},DEFAULT,#{articleBlogIdContent},DEFAULT,DEFAULT)")
+     * TODO 文章ID默认值需要修改
+     */
+    @Insert("INSERT INTO qiyun_blog_article VALUES (#{articleUserId},#{articleBlogId},DEFAULT,#{articleBlogIdContent},#{articleBlogDate},DEFAULT)")
     int insertArticle(BlogArticle blogArticle);
 
-
-
-    /**
-     * 通过文章id进行修改简介
-     *
-     * @param id           文章id
-     * @param introduction 简介
-     * @return
-     */
-    @Update("UPDATE qiyun_blog_article SET article_blog_id_content=#{introduction} WHERE article_blog_id= #{id}")
-    int updateArticleIntroduction(Integer id, String introduction);
 
     /**
      * 查询所有文章id
@@ -45,6 +35,11 @@ public interface BlogArticleMapper {
     @Delete("DELETE FROM qiyun_blog_article WHERE article_blog_id=#{id}")
     int deleteArticleById(Integer id);
 
+    /**
+     * 修改文章
+     * @param blogArticle 文章属性
+     * @return
+     */
     @Update("UPDATE qiyun_blog_article SET article_blog_image_id=#{articleBlogImageId}," +
             "article_blog_id_content=#{articleBlogIdContent},article_num=#{articleNum} WHERE article_blog_id=#{articleBlogId}")
     int updateArticle(BlogArticle blogArticle);
