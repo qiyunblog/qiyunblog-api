@@ -1,5 +1,7 @@
 package com.itshanhe.qiyunblogapi.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,19 +11,21 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel("博客文章表")
 public class BlogArticle {
-//    用户id
+
+    @ApiModelProperty("用户id")
     private Integer articleUserId;
-//    文章ID
+    @ApiModelProperty("文章ID")
     private Integer articleBlogId;
-//    文章图片
+    @ApiModelProperty("文章图片")
     private Integer articleBlogImageId;
-//    文章简介
+    @ApiModelProperty("文章简介")
     private String articleBlogIdContent;
-//    文章评论
+    @ApiModelProperty("文章评论")
     private Integer articleNum;
-//    文章发布时间
+    @ApiModelProperty("文章发布时间")
     private Date articleBlogDate;
-//    文章数据
+    @ApiModelProperty("文章内部属性")
     private BlogArticleContent blogArticleContent;
 }

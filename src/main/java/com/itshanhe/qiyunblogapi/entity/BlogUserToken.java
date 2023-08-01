@@ -1,5 +1,6 @@
 package com.itshanhe.qiyunblogapi.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
@@ -9,12 +10,13 @@ import java.util.Date;
  */
 @Data
 public class BlogUserToken {
-//    token 用户id
+
+    @ApiModelProperty("token 用户id")
     private Long tokenUserId;
-//    token值(32位字符串)
+    @ApiModelProperty("token值(32位字符串)")
     private String token;
-//    token 修改时间
+    @ApiModelProperty("token 修改时间")
     private Date tokenUpdateTime;
-//    token 过期时间
+    @ApiModelProperty("token 过期时间")
     private Date tokenExpireTime;
 }
