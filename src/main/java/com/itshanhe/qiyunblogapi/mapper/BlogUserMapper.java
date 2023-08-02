@@ -91,4 +91,11 @@ public interface BlogUserMapper {
      */
     @Update("UPDATE qiyun_blog_user_token SET token = #{jwtToken},token_update_time = DEFAULT WHERE token_user_id = #{userId}")
     void userUpdateToken(Integer userId, String jwtToken);
+    
+    /**
+     * 获取所有数据
+     * @return
+     */
+    @Select("SELECT COUNT(*) from qiyun_blog_user")
+    int selectCount();
 }

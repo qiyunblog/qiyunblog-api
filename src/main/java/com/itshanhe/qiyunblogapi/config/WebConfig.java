@@ -36,7 +36,7 @@ public class WebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/home/**").addResourceLocations("classpath:/web/");
+//        registry.addResourceHandler("/home/**").addResourceLocations("classpath:/web/");
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
@@ -44,7 +44,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
 //        指定控制器
-        registry.addViewController("/").setViewName("/home/index.html");
+//        registry.addViewController("/").setViewName("/home/index.html");
     }
 
 

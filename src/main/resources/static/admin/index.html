@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>七云博客注册页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale:1.0,minimum-scale:1.0">
+    <link href="../view/register.css" rel="stylesheet">
+</head>
+<body>
+<!-- 这是一个包含登录和注册表单的主要区域 -->
+<main>
+    <!-- 包含登录和注册表单的容器 -->
+    <div class="box">
+        <!-- 包含登录和注册表单的内部容器 -->
+        <div class="inner-box">
+            <!-- 包含登录和注册表单的表单容器 -->
+            <div class="forms-wrap">
+                <!-- 登录表单 -->
+                <form action="javascript:;" autocomplete="off" class="sign-in-form">
+                    <!-- 包含网站logo的容器 -->
+                    <div class="logo">
+                        <h4 style="background: #f7f7f7">七云博客后台</h4>
+                    </div>
+                    <!-- 包含标题和切换注册表单的链接的容器 -->
+                    <div class="heading">
+                        <h2 style="color:#fff;">用户登陆</h2>
+                        <h6>没有账号?点击下方注册</h6>
+                        <a href="#" class="toggle" style="color:orangered">点我注册</a>
+                    </div>
+                    <!-- 包含输入字段和提交按钮的容器 -->
+                    <div class="actual-form">
+                        <!-- 包含用户名输入字段的容器 -->
+                        <div class="input-wrap">
+                            <input id="name" type="text" minlength="1" autocomplete="off" required
+                                   class="input-field">
+                            <label for="name">账号</label>
+                        </div>
+                        <!-- 包含密码输入字段的容器 -->
+                        <div class="input-wrap">
+                            <input id="password" type="password" autocomplete="off" required class="input-field">
+                            <label for="password">密码</label>
+                        </div>
+                        <!-- 登录表单的提交按钮 -->
+                        <input id="login" type="submit" value="SIGN IN" class="sign-btn">
+                        <!-- 忘记密码的链接 -->
+                        <p  class="text">忘记密码?
+                            <a href="#">点击更改密码</a>
+                        </p>
+                    </div>
+                </form>
+                <!-- 注册表单 -->
+                <form action="javascript:;" autocomplete="off" class="sign-up-form">
+                    <!-- 包含网站logo的容器 -->
+                    <div class="logo">
+                        <!-- <img src="" alt=""> -->
+                        <h4 style="color: yellowgreen">七云博客后台</h4>
+                    </div>
+                    <!-- 包含标题和切换登录表单的链接的容器 -->
+                    <div class="heading">
+                        <h2 style="color:#fff;">用户注册</h2>
+                        <h6>已经有账号了?点击旁边登陆</h6>
+                        <a href="#" class="toggle" style="color:orangered">点我登陆</a>
+                    </div>
+                    <!-- 包含输入字段和提交按钮的容器 -->
+                    <div class="actual-form">
+                        <!-- 包含用户名输入字段的容器 -->
+                        <div class="input-wrap">
+                            <input id="sign-name" type="text" minlength="1" autocomplete="off" required
+                                   class="input-field">
+                            <label for="sign-name">账号</label>
+                        </div>
+                        <!-- 包含用户昵称输入字段的容器 -->
+                        <div class="input-wrap">
+                            <input id="sign-nickname" type="text" minlength="1" autocomplete="off" required
+                                   class="input-field">
+                            <label for="sign-name">用户昵称</label>
+                        </div>
+                        <!-- 包含电子邮件输入字段的容器 -->
+                        <div class="input-wrap">
+                            <input id="sign-email" type="email" autocomplete="off" required class="input-field">
+                            <label for="sign-email">邮箱</label>
+                        </div>
+                        <!-- 包含密码输入字段的容器 -->
+                        <div class="input-wrap">
+                            <input id="sign-password" type="password" autocomplete="off" required
+                                   class="input-field">
+                            <label for="sign-password">密码</label>
+                        </div>
+                        <!-- 注册表单的提交按钮 -->
+                        <input id="register" type="submit" value="SIGN IN" class="sign-btn">
+                        <!-- 同意服务条款和隐私协议的复选框 -->
+                        <p class="text"> <input type="checkbox" name="" id="">注册前我已阅读并同意
+                            <a href="#">服务条款</a>和<a href="#">隐私协议</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <!-- 包含轮播图的容器 -->
+            <div class="carousel">
+                <!-- 包含轮播图图片的容器 -->
+                <div class="images-wrapper">
+                    <img src="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/live/68ff62863bb9fd90d6fd874802e08568.mp4.jpg"
+                         class="image img-1 show" alt="">
+                    <img src="https://wallpaper-static.cheetahfun.com/wallpaper/sites/scifi/pic5.jpg" alt=""
+                         class="image img-2">
+                    <img src="https://img-baofun.zhhainiao.com/pcwallpaper_ugc/live/8bc682fba0a8747155409b3bbc2676ac.mp4.jpg"
+                         alt="" class="image img-3">
+                </div>
+                <!-- 包含轮播图文本和轮播图指示器的容器 -->
+                <div class="text-slider">
+                    <!-- 包含轮播图文本的容器 -->
+                    <div class="text-wrap">
+                        <div class="text-group">
+                            <h2>欢迎访问七云博客</h2>
+                            <h2>本项目基于spring开发</h2>
+                            <h2>本项目为单体项目</h2>
+                        </div>
+                    </div>
+                    <!-- 包含轮播图指示器的容器 -->
+                    <div class="bullets">
+                        <span class="active" data-value="1"></span>
+                        <span data-value="2"></span>
+                        <span data-value="3"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    // 获取页面中所有的输入框元素
+    const inputs = document.querySelectorAll('.input-field')
+    // 获取页面中所有的切换按钮元素
+    const toggle_btn = document.querySelectorAll('.toggle')
+    // 获取页面中的main元素
+    const main = document.querySelector('main')
+    // 获取页面中所有的小圆点元素
+    const bullets = document.querySelectorAll('.bullets span')
+    // 获取页面中所有的图片元素
+    const images = document.querySelectorAll('.image')
+
+    // 为所有输入框元素添加获取焦点和失去焦点的事件监听器
+    inputs.forEach(inp =>{
+        inp.addEventListener('focus',()=>{
+            inp.classList.add('active')
+        })
+        inp.addEventListener('blur',()=>{
+            if(inp.value !='')return
+            inp.classList.remove('active')
+        })
+    })
+
+    // 为所有切换按钮元素添加点击事件监听器
+    toggle_btn.forEach(btn =>{
+        btn.addEventListener('click',()=>{
+            main.classList.toggle('sign-up-mode')
+        })
+    })
+
+    // 定义moveSlider函数，用于实现图片轮播和文本滑动的效果
+    function moveSlider(){
+        // 获取当前点击的小圆点的索引值
+        let index = this.dataset.value;
+        // 根据索引值获取对应的图片元素
+        let currentImg = document.querySelector(`.img-${index}`)
+        // 将其他图片元素的show类名移除，将当前图片元素添加show类名
+        images.forEach(img =>{
+            img.classList.remove('show')
+        })
+        currentImg.classList.add('show')
+        // 获取文本滑动元素
+        const textSlider = document.querySelector('.text-group')
+        // 将文本滑动元素的transform属性设置为当前索引值对应的位置
+        textSlider.style.transform = `translateY(${-(index-1)*2.2}rem)`
+        // 将其他小圆点的active类名移除，将当前小圆点添加active类名
+        bullets.forEach(bullet =>{
+            bullet.classList.remove('active')
+        })
+        this.classList.add('active')
+    }
+
+    // 为所有小圆点元素添加点击事件监听器
+    bullets.forEach(bullet =>{
+        bullet.addEventListener('click',moveSlider)
+    })
+    //登陆
+    document.getElementById("login").onclick = function () {
+        if (inputs[0].value !="" && inputs[1].value !="") {
+            var opt = {
+                "userUsername":inputs[0].value,
+                "userPassword":inputs[1].value
+            }
+            console.log(JSON.stringify(opt))
+            $.ajax({
+                type: "post",
+                url: api+"user/login",
+                dataType : "json",
+                contentType: "application/json;charset=UTF-8",
+                data: JSON.stringify(opt),
+                success: function (d) {
+                    console.log(d);
+                    alert(data);
+                }
+            });
+        }
+    }
+    //注册
+    document.getElementById("register").onclick = function () {
+        if (inputs[2].value !="" && inputs[3].value !="" && inputs[4].value !="" && inputs[5].value !="") {
+            var opt = {
+                "userUsername":inputs[2].value,
+                "userPassword":inputs[3].value,
+                "userNickName":inputs[4].value,
+                "userEmail":inputs[5].value
+            }
+
+            console.log(JSON.stringify(opt))
+            $.ajax({
+                type: "post",
+                url: "http://localhost:8080/user/register",
+                dataType : "json",
+                contentType: "application/json;charset=UTF-8",
+                data: JSON.stringify(opt),
+                success: function (data) {
+                    console.log(data);
+                    alert(data);
+                }
+            });
+        }
+    }
+
+</script>
+</body>
+<script src="../view/index.js"></script>
+<script src="../view/jquery-3.6.0.js"></script>
+</html>

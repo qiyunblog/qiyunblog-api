@@ -16,6 +16,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +44,9 @@ public class UserController {
     private DomainUtil domainUtil;
 //    默认报错为null
     private String paramError = null;
+//    是否开启邮箱验证 默认为false
+    @Value("${email.test:false}")
+    private Boolean emailIF;
     
     /**
      * 用户注册
@@ -67,6 +71,10 @@ public class UserController {
             return Result.error(this.paramError);
         }
         
+//        临时验证
+        if (blogUserService.userCount() > 50) {
+            return Result.error("注册已经到上限");
+        }
 
 //            获取返回值
         int resultUser = blogUserService.userRegister(blogRegisterParam.getUserUsername(), MD5Util.Md5Code(blogRegisterParam.getUserPassword()), blogRegisterParam.getUserNickName(),blogRegisterParam.getUserEmail());
@@ -80,22 +88,24 @@ public class UserController {
         String getUserId = blogUserService.userGetId(blogRegisterParam.getUserUsername());
 //        MD5加密ID
         String md5Id = MD5Util.Md5Code(getUserId);
-        
-        //        发送邮箱验证码
+        //        临时邮箱验证
+        if (this.emailIF) {
+            //        发送邮箱验证码
 //        需要发送的QQ邮箱
-        String to = blogRegisterParam.getUserEmail();
+            String to = blogRegisterParam.getUserEmail();
 //        发送主题
-        String subject = "七云博客邮箱验证";
+            String subject = "七云博客邮箱验证";
 //        发送的HTML内容 并且设置过期时间为10分钟
-        String text = "<h1>七云博客邮箱验证</h1><p>欢迎注册七云博客,请点击以下链接进行注册.</p><p>"+domainUtil.getDomain()+"user/emailVerify/"+ TimeUtil.getSetCurrentTime(10) +"/name="+blogRegisterParam.getUserUsername()+"&md5="+md5Id+"</p>";
-        log.info("邮件发送前{},tex:{}",to,text);
-        if (mailService.sendHtmlMail(to,subject,text) == -1) {
-            log.info("邮箱有问题");
+            String text = "<h1>七云博客邮箱验证</h1><p>欢迎注册七云博客,请点击以下链接进行注册.</p><p>"+domainUtil.getDomain()+"user/emailVerify/"+ TimeUtil.getSetCurrentTime(10) +"/name="+blogRegisterParam.getUserUsername()+"&md5="+md5Id+"</p>";
+            log.info("邮件发送前{},tex:{}",to,text);
+            if (mailService.sendHtmlMail(to,subject,text) == -1) {
+                log.info("邮箱有问题");
 //            删除用户
-            blogUserService.userDeleteName(blogRegisterParam.getUserUsername());
-            return Result.error("邮箱发送失败,请重新注册填写注册");
+                blogUserService.userDeleteName(blogRegisterParam.getUserUsername());
+                return Result.error("邮箱发送失败,请重新注册填写注册");
+            }
         }
-        
+
         
         return Result.success("注册成功！请在邮箱里点击验证才能完成注册.");
     }

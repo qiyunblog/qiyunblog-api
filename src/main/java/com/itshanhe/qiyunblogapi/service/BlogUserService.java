@@ -9,6 +9,12 @@ import java.util.Map;
  */
 public interface BlogUserService {
     /**
+     * 获取数据总数
+     * @return
+     */
+    int userCount();
+    
+    /**
      * 用户注册
      * @param username 用户账号
      * @param password 用户密码

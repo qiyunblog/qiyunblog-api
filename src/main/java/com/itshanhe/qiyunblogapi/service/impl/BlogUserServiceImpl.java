@@ -18,6 +18,15 @@ public class BlogUserServiceImpl implements BlogUserService {
     private BlogUserMapper userMapper;
     
     /**
+     * 获取数据总数
+     * @return
+     */
+    @Override
+    public int userCount() {
+        return userMapper.selectCount();
+    }
+    
+    /**
      * 用户注册
      * @param username 用户账号
      * @param password 用户密码

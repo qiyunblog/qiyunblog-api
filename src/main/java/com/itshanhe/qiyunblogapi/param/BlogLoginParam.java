@@ -17,6 +17,6 @@ public class BlogLoginParam implements Serializable {
     private String userUsername;
     //    用户密码
     @NotEmpty(message = "密码不能为空")
-    @Length(min = 6,max = 18,message = "密码要6-18位")
+//    @Length(min = 2,max = 18,message = "密码要2-18位")
     private String userPassword;
 }
