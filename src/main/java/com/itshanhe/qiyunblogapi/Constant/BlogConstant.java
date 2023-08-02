@@ -1,7 +1,7 @@
 package com.itshanhe.qiyunblogapi.Constant;
 
 /**
- * 博客状态
+ * 博客状态常量类
  */
 public class BlogConstant {
     //精选

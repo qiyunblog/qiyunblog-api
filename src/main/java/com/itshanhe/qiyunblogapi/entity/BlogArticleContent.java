@@ -1,6 +1,7 @@
 package com.itshanhe.qiyunblogapi.entity;
 
 import com.itshanhe.qiyunblogapi.Constant.BlogConstant;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,17 +10,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BlogArticleContent {
-////    文章ID
-//    private Integer contentArticleBlogId;
-//    文章分类ID
+
+    @ApiModelProperty("文章分类ID")
     private Integer contentArticleBlogArticleId;
-//    文章标题
+    @ApiModelProperty("文章标题")
     private String contentArticleBlogName;
-//    文章内容
+    @ApiModelProperty("文章内容")
     private String contentArticleBlogBoy;
-//    文章关键词
+    @ApiModelProperty("文章关键词")
     private String contentArticleBlogKeyword;
-//    文章精选
+    @ApiModelProperty("文章精选")
     private Integer contentArticleRecommend;
 
     public BlogArticleContent(Integer contentArticleBlogArticleId, String contentArticleBlogName, String contentArticleBlogBoy, String contentArticleBlogKeyword) {
@@ -27,6 +27,6 @@ public class BlogArticleContent {
         this.contentArticleBlogName = contentArticleBlogName;
         this.contentArticleBlogBoy = contentArticleBlogBoy;
         this.contentArticleBlogKeyword = contentArticleBlogKeyword;
-        this.contentArticleRecommend= BlogConstant.DEFAULT;
+        this.contentArticleRecommend = BlogConstant.DEFAULT;
     }
 }

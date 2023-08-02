@@ -1,5 +1,6 @@
 package com.itshanhe.qiyunblogapi.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,14 +12,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BlogUser {
-//    用户ID
+
+    @ApiModelProperty("用户ID")
     private Integer userId;
-//    用户账号
+    @ApiModelProperty("用户账号")
     private String userUsername;
-//    用户密码
+    @ApiModelProperty("用户密码")
     private String userPassword;
-//    用户昵称
+    @ApiModelProperty("用户昵称")
     private String userNickName;
-//    是否锁定 0 未锁定 1锁定
+    @ApiModelProperty("是否锁定 0 未锁定 1锁定")
     private Integer userLocked;
 }
