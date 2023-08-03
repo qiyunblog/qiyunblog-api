@@ -237,4 +237,18 @@ public class UserController {
         
         return Result.success("更改成功");
     }
+    
+    /**
+     * 后台用户查询,默认查询用户 未完成
+     * @param page 默认1
+     * @param pageSize 默认 10 条
+     * @param token 令牌
+     * @return
+     */
+    @GetMapping("list/{token}")
+    public Result userQueryAllData(@RequestParam(defaultValue = "1") Integer page,
+                                   @RequestParam(defaultValue = "10") Integer pageSize,@PathVariable String token) {
+        
+        return Result.success("ok");
+    }
 }
