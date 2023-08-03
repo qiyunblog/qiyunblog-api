@@ -11,7 +11,7 @@
 <body>
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
-    <div class="layui-logo layui-hide-xs layui-bg-black">layout demo</div>
+    <div class="layui-logo layui-hide-xs layui-bg-black">七云博客</div>
     <!-- 头部区域（可配合layui 已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       <!-- 移动端显示 -->
@@ -105,7 +105,7 @@
     var token = null;
     token = $.cookie('token');
   if (token == null) {
-    alert("你没登录,请先登陆");
+    alert("你没登录,请先登陆!");
     window.location.replace(api+"admin/index.html");
   }
   //JS
