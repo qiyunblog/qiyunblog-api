@@ -4,7 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.itshanhe.qiyunblogapi.mapper.BlogArticleMapper">
-
+<!--    @Update("UPDATE qiyun_blog_article SET article_blog_image_id=#{articleBlogImageId}," +
+            "article_blog_id_content=#{articleBlogIdContent},article_num=#{articleNum} WHERE article_blog_id=#{articleBlogId}")-->
+    <update id="updateArticle" >
+        UPDATE qiyun_blog_article
+        <set>
+            <if test="articleBlogImageId!=null">article_blog_image_id=#{articleBlogImageId},</if>
+            <if test="articleBlogIdContent!=null">article_blog_id_content=#{articleBlogIdContent},</if>
+            <if test="articleNum">article_num=#{articleNum},</if>
+        </set>
+        where article_blog_id = #{articleBlogId}
+    </update>
 
 
 </mapper>

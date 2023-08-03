@@ -4,8 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.itshanhe.qiyunblogapi.mapper.BlogArticleContentMapper">
-
-
+<!--@Update("update qiyun_blog_article_content set content_article_blog_article_id=#{param2.contentArticleBlogArticleId}," +
+            " content_article_blog_name=#{param2.contentArticleBlogName}," +
+            "content_article_blog_boy=#{param2.contentArticleBlogBoy}," +
+            "content_article_blog_keyword=#{param2.contentArticleBlogKeyword}," +
+            "content_article_recommend=#{param2.contentArticleRecommend} " +
+            "where content_article_blog_id=#{id}")-->
+    <update id="updateBlog" parameterType="com.itshanhe.qiyunblogapi.entity.BlogArticleContent">
+        update qiyun_blog_article_content
+        <set>
+            <if test="blogArticleContent.contentArticleBlogName!=null">content_article_blog_name=#{blogArticleContent.contentArticleBlogName},</if>
+            <if test="blogArticleContent.contentArticleBlogBoy!=null">content_article_blog_boy=#{blogArticleContent.contentArticleBlogBoy},</if>
+            <if test="blogArticleContent.contentArticleBlogKeyword!=null">content_article_blog_keyword=#{blogArticleContent.contentArticleBlogKeyword},</if>
+            <if test="blogArticleContent.contentArticleRecommend!=null">content_article_recommend=#{blogArticleContent.contentArticleRecommend},</if>
+        </set>
+        WHERE content_article_blog_id=#{id}
+    </update>
 
 
 </mapper>

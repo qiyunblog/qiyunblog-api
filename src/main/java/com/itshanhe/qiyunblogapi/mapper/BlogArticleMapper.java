@@ -4,7 +4,7 @@ import com.itshanhe.qiyunblogapi.entity.BlogArticle;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
-
+@Mapper
 public interface BlogArticleMapper {
 
 
@@ -40,7 +40,6 @@ public interface BlogArticleMapper {
      * @param blogArticle 文章属性
      * @return
      */
-    @Update("UPDATE qiyun_blog_article SET article_blog_image_id=#{articleBlogImageId}," +
-            "article_blog_id_content=#{articleBlogIdContent},article_num=#{articleNum} WHERE article_blog_id=#{articleBlogId}")
+
     int updateArticle(BlogArticle blogArticle);
 }

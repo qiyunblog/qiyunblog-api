@@ -6,6 +6,7 @@ import com.itshanhe.qiyunblogapi.mapper.BlogArticleContentMapper;
 import com.itshanhe.qiyunblogapi.mapper.BlogArticleMapper;
 import com.itshanhe.qiyunblogapi.service.BlogArticleService;
 import io.swagger.models.auth.In;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
+@Slf4j
 public class BlogArticleServiceImpl implements BlogArticleService {
 
     @Autowired
@@ -68,7 +71,7 @@ public class BlogArticleServiceImpl implements BlogArticleService {
      * @return
      */
     @Override
-    @Transactional
+
     public Boolean updateBlog(BlogArticle blogArticle) {
         //获取文章id
         Integer id = blogArticle.getArticleBlogId();
