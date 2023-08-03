@@ -2,9 +2,9 @@
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
-    <title>七云博客注册页面</title>
+    <title>七云博客后台</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale:1.0,minimum-scale:1.0">
-    <link href="../view/register.css" rel="stylesheet">
+    <link href="../view/css/register.css" rel="stylesheet">
 </head>
 <body>
 <!-- 这是一个包含登录和注册表单的主要区域 -->
@@ -127,7 +127,15 @@
         </div>
     </div>
 </main>
+</body>
+<script src="../view/js/index.js"></script>
+<script src="../view/js/jquery-3.6.0.js"></script>
+<script src="../view/js/jquery.cookie.min.js"></script>
 <script>
+    if ($.cookie('token') !=null) {
+        window.location.replace(api+"admin/home.html");
+        alert("用户:"+$.cookie('blogUserName')+"已经登录,请不要再次登录");
+    }
     // 获取页面中所有的输入框元素
     const inputs = document.querySelectorAll('.input-field')
     // 获取页面中所有的切换按钮元素
@@ -197,9 +205,17 @@
                 dataType : "json",
                 contentType: "application/json;charset=UTF-8",
                 data: JSON.stringify(opt),
-                success: function (d) {
-                    console.log(d);
-                    alert(data);
+                success: function (data) {
+                    if (data.code == 200) {
+                        //设置token进入cookie
+                        $.cookie('blogUserName', inputs[0].value, { expires: 3 });
+                        $.cookie('token', data.data, { expires: 3 });
+                        name = $.cookie('blogUserName');
+                        alert(name+"登陆成功!");
+                        window.location.replace(api+"admin/home.html")
+                    } else {
+                        alert(data.msg);
+                    }
                 }
             });
         }
@@ -222,15 +238,15 @@
                 contentType: "application/json;charset=UTF-8",
                 data: JSON.stringify(opt),
                 success: function (data) {
-                    console.log(data);
-                    alert(data);
+                    if (data.code == 200) {
+                        alert(data.msg)
+                    } else {
+                        alert(data.msg)
+                    }
                 }
             });
         }
     }
 
 </script>
-</body>
-<script src="../view/index.js"></script>
-<script src="../view/jquery-3.6.0.js"></script>
 </html>
