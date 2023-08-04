@@ -9,5 +9,5 @@ public interface BlogUploadMapper {
      * 图片上传
      * @param filePath 图片路径
      */
-    void uploadImg(String filePath);
+    Integer uploadImg(String filePath);
 }

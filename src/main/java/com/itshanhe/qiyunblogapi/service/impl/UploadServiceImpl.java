@@ -10,8 +10,9 @@ public class UploadServiceImpl implements UploadService {
     private BlogUploadMapper blogUpload;
 
     @Override
-    public void upload(String filePath) {
+    public Boolean upload(String filePath) {
 
-        blogUpload.uploadImg(filePath);
+
+        return blogUpload.uploadImg(filePath)>0;
     }
 }

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.itshanhe.qiyunblogapi.mapper.BlogUploadMapper">
-    <insert id="UploadImg" useGeneratedKeys="true" keyProperty="articleBlogImgId">
+    <insert id="UploadImg" >
         insert into qiyun_blog_article_img values (NULL,#{filePath},DEFAULT)
     </insert>
 </mapper>
