@@ -6,6 +6,13 @@
 <mapper namespace="com.itshanhe.qiyunblogapi.mapper.BlogArticleMapper">
 <!--    @Update("UPDATE qiyun_blog_article SET article_blog_image_id=#{articleBlogImageId}," +
             "article_blog_id_content=#{articleBlogIdContent},article_num=#{articleNum} WHERE article_blog_id=#{articleBlogId}")-->
+
+    <insert id="insertArticle" keyProperty="articleBlogId" useGeneratedKeys="true">
+       INSERT INTO qiyun_blog_article VALUES (#{articleUserId},#{articleBlogId},DEFAULT,#{articleBlogIdContent},DEFAULT,DEFAULT)
+
+    </insert>
+
+
     <update id="updateArticle" >
         UPDATE qiyun_blog_article
         <set>

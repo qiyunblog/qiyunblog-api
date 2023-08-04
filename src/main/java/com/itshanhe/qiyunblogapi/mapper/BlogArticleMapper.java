@@ -15,8 +15,7 @@ public interface BlogArticleMapper {
      * @return
      * TODO 文章ID默认值需要修改
      */
-    @Insert("INSERT INTO qiyun_blog_article VALUES (#{articleUserId},#{articleBlogId},DEFAULT,#{articleBlogIdContent},#{articleBlogDate},DEFAULT)")
-    int insertArticle(BlogArticle blogArticle);
+        int insertArticle(BlogArticle blogArticle);
 
 
     /**

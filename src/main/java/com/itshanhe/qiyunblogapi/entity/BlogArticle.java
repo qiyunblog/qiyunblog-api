@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -25,7 +26,7 @@ public class BlogArticle {
     @ApiModelProperty("文章评论")
     private Integer articleNum;
     @ApiModelProperty("文章发布时间")
-    private Date articleBlogDate;
+    private LocalDateTime articleBlogDate;
     @ApiModelProperty("文章内部属性")
     private BlogArticleContent blogArticleContent;
 }
