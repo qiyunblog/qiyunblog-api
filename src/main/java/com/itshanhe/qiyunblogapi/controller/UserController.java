@@ -3,6 +3,7 @@ package com.itshanhe.qiyunblogapi.controller;
 import com.itshanhe.qiyunblogapi.entity.BlogUpdateUser;
 import com.itshanhe.qiyunblogapi.entity.BlogUser;
 import com.itshanhe.qiyunblogapi.entity.Result;
+import com.itshanhe.qiyunblogapi.entity.TokenData;
 import com.itshanhe.qiyunblogapi.param.BlogLoginParam;
 import com.itshanhe.qiyunblogapi.param.BlogRegisterParam;
 import com.itshanhe.qiyunblogapi.param.BlogUpdateParam;
@@ -99,7 +100,7 @@ public class UserController {
             String text = "<h1>七云博客邮箱验证</h1><p>欢迎注册七云博客,请点击以下链接进行注册.</p><p>"+domainUtil.getDomain()+"user/emailVerify/"+ TimeUtil.getSetCurrentTime(10) +"/name="+blogRegisterParam.getUserUsername()+"&md5="+md5Id+"</p>";
             log.info("邮件发送前{},tex:{}",to,text);
             if (mailService.sendHtmlMail(to,subject,text) == -1) {
-                log.info("邮箱有问题");
+                log.debug("邮箱有问题");
 //            删除用户
                 blogUserService.userDeleteName(blogRegisterParam.getUserUsername());
                 return Result.error("邮箱发送失败,请重新注册填写注册");
@@ -142,11 +143,12 @@ public class UserController {
 //        发给前端的ID -1000 因为SQL里面设置的是1000开头
         claims.put("uuid",(userLogin.getUserId()-1000));
         claims.put("name",userLogin.getUserUsername());
+        claims.put("nickname",userLogin.getUserNickName());
         String JwtToken = JwtUtil.generateJwt(claims);
-        log.info("token令牌{}",claims);
+        log.debug("token令牌{}",claims);
 //        写入数据库
         blogUserService.userSetToken(userLogin.getUserId(),JwtToken);
-        log.info("token记录数据库成功");
+        log.debug("token记录数据库成功");
 //        返回token令牌
         return Result.success("登陆成功，返回Token令牌",JwtToken);
     }
@@ -248,7 +250,11 @@ public class UserController {
     @GetMapping("list/{token}")
     public Result userQueryAllData(@RequestParam(defaultValue = "1") Integer page,
                                    @RequestParam(defaultValue = "10") Integer pageSize,@PathVariable String token) {
-        
+//        解析token 令牌 获取令牌数据
+        TokenData tokenData = blogUserService.TokenData(token);
+//        获取用户权限
+        int userType = blogUserService.userType(tokenData.getUuid());
+        log.debug("权限:{}",userType);
         return Result.success("ok");
     }
 }

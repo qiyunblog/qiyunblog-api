@@ -1,6 +1,7 @@
 package com.itshanhe.qiyunblogapi.service;
 
 import com.itshanhe.qiyunblogapi.entity.BlogUser;
+import com.itshanhe.qiyunblogapi.entity.TokenData;
 
 import java.util.Map;
 
@@ -81,4 +82,18 @@ public interface BlogUserService {
      * @return -1失败 1成功
      */
     int userTokenStatus(Integer userID, String token);
+    
+    /**
+     * 获取token令牌中的数据
+     * @param token
+     * @return
+     */
+    TokenData TokenData(String token);
+    
+    /**
+     * 根据id获取用户权限
+     * @param uuid
+     * @return
+     */
+    int userType(int uuid);
 }

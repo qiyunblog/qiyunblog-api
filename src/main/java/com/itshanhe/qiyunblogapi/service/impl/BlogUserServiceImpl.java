@@ -3,9 +3,11 @@ package com.itshanhe.qiyunblogapi.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.itshanhe.qiyunblogapi.entity.BlogUser;
 import com.itshanhe.qiyunblogapi.entity.Result;
+import com.itshanhe.qiyunblogapi.entity.TokenData;
 import com.itshanhe.qiyunblogapi.mapper.BlogUserMapper;
 import com.itshanhe.qiyunblogapi.service.BlogUserService;
 import com.itshanhe.qiyunblogapi.util.JwtUtil;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,10 +41,10 @@ public class BlogUserServiceImpl implements BlogUserService {
     @Override
     public int userRegister(String username, String password, String nickname,String email) {
         BlogUser selectUserDataName = userMapper.selectUserDataName(username);
-        log.info("user:{}",selectUserDataName);
+        log.debug("user:{}",selectUserDataName);
 //        判断是否有相同账号
         if (selectUserDataName != null) {
-            log.info("查询到有相同账号:{}",selectUserDataName.getUserUsername());
+            log.debug("查询到有相同账号:{}",selectUserDataName.getUserUsername());
             return -1;
         }
 //        执行注册
@@ -66,16 +68,16 @@ public class BlogUserServiceImpl implements BlogUserService {
         BlogUser selectUserData =  userMapper.selectUserData(username);
         //        判断是否有账号
         if (selectUserData == null) {
-            log.info("未查询到有账号");
+            log.debug("未查询到有账号");
             return null;
         }
 //        如果账号正确,那就开始比对加密后的密码
         if (!password.equals(selectUserData.getUserPassword())) {
-            log.info("密码错误,账号为:{}",selectUserData.getUserUsername());
-            log.info("查询到的密码是:{},提交的密码是:{}",selectUserData.getUserPassword(),password);
+            log.debug("密码错误,账号为:{}",selectUserData.getUserUsername());
+            log.debug("查询到的密码是:{},提交的密码是:{}",selectUserData.getUserPassword(),password);
             return null;
         }
-        log.info("成功{}",selectUserData);
+        log.debug("成功{}",selectUserData);
 //        都比对成功就返回成功
         return selectUserData;
     }
@@ -162,7 +164,7 @@ public class BlogUserServiceImpl implements BlogUserService {
 //                log.info("{}",JwtUtil.parseJWT(token));
             } catch (Exception e) {//jwt解析失败
                 e.printStackTrace();
-                log.info("解析令牌失败, 返回未登录错误信息");
+                log.debug("解析令牌失败, 返回未登录错误信息");
                 return -1;
             }
 //            存在
@@ -171,5 +173,39 @@ public class BlogUserServiceImpl implements BlogUserService {
 //            不存在token就返回-1
             return -1;
         }
+    }
+    
+    @Override
+    public TokenData TokenData(String token) {
+        try {
+            int claimsId = (int) JwtUtil.parseJWT(token).get("uuid");
+            String claimsName = (String) JwtUtil.parseJWT(token).get("name");
+            String claimsNickname = (String) JwtUtil.parseJWT(token).get("nickname");
+            //        实例化类
+            TokenData tokenData = new TokenData(claimsId+1000,claimsName,claimsNickname);
+//            log.info("获取成功,令牌用户id:{}",claimsId);
+//            log.info("获取成功,令牌用户账号:{}",claimsName);
+//            log.info("获取成功,令牌用户昵称:{}",claimsNickname);
+            log.debug("获取成功:{}",tokenData);
+            return tokenData;
+//                log.info("{}",JwtUtil.parseJWT(token));
+        } catch (Exception e) {//jwt解析失败
+            e.printStackTrace();
+            log.debug("解析令牌失败, 返回未登录错误信息");
+            return null;
+        }
+    }
+    
+    /**
+     * 权限
+     * @param uuid 用户id
+     * @return
+     * 暂时只有两个权限 所以写简单点
+     * 1 --- admin
+     * 0 --- user
+     */
+    @Override
+    public int userType(int uuid) {
+        return userMapper.selectUserType(uuid);
     }
 }

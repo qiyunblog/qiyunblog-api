@@ -96,4 +96,11 @@ public interface BlogUserMapper {
      */
     @Select("SELECT COUNT(*) from qiyun_blog_user")
     int selectCount();
+    
+    /**
+     * 根据id获取权限
+     * @param uuid
+     * @return
+     */
+    int selectUserType(int uuid);
 }

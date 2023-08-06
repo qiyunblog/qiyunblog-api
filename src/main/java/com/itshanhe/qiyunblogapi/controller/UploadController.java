@@ -1,4 +1,5 @@
 package com.itshanhe.qiyunblogapi.controller;
+/*
 
 import com.itshanhe.qiyunblogapi.entity.Result;
 import com.itshanhe.qiyunblogapi.service.UploadService;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+
 
 @RestController
 @Api("文件上传控制器")
@@ -46,3 +48,5 @@ public class UploadController {
         return Result.success();
     }
 }
+
+*/
