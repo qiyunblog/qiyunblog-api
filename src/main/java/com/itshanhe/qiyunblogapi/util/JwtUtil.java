@@ -11,7 +11,7 @@ import java.util.Map;
  * jwt 生成和解析
  */
 public class JwtUtil {
-    //    签名算法
+    //    签名密钥
     private static String signKey = "qiyunblog";
     //    过期时间 毫秒 换算就是 24小时
     private static Long expire = 86400000L;

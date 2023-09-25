@@ -47,7 +47,7 @@ public class UserController {
     private String paramError = null;
 //    是否开启邮箱验证 默认为false
     @Value("${email.test:false}")
-    private Boolean emailIF;
+    private Boolean emailIF = false;
     
     /**
      * 用户注册
@@ -87,6 +87,7 @@ public class UserController {
         
 //        获取ID
         String getUserId = blogUserService.userGetId(blogRegisterParam.getUserUsername());
+
 //        MD5加密ID
         String md5Id = MD5Util.Md5Code(getUserId);
         //        临时邮箱验证
@@ -134,10 +135,10 @@ public class UserController {
         if (userLogin == null) {
             return Result.error("账号或密码错误");
         }
-//        验证用户是否是锁定状态
-        if (userLogin.getUserLocked() == 1) {
-            return Result.error("你的账号已经被锁定");
-        }
+////        验证用户是否是锁定状态
+//        if (userLogin.getUserLocked() == 1) {
+//            return Result.error("你的账号已经被锁定");
+//        }
 //        验证完之后颁发token令牌 令牌默认24小时后过期
         Map<String,Object> claims =new HashMap<>();
 //        发给前端的ID -1000 因为SQL里面设置的是1000开头
